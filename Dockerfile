@@ -1,10 +1,10 @@
-FROM node:22 as build-stage
+FROM node:latest AS build
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install -g @angular/cli
 
 COPY . .
 
@@ -14,6 +14,6 @@ FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY --from=build-stage /app/dist/angular-ui /usr/share/nginx/html
+COPY --from=build /app/dist/angular-ui /usr/share/nginx/html
 
 EXPOSE 80
