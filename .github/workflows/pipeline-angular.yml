@@ -30,7 +30,6 @@ jobs:
       - name: Build & Push to DockerHub
         uses: docker/build-push-action@v5
         with:
-          context: angular-ui
           file: Dockerfile
           push: true
           platforms: linux/amd64
