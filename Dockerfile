@@ -16,4 +16,4 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=build-stage /app/dist/angular-ui /usr/share/nginx/html
 
-EXPOSE 85
+EXPOSE 80
