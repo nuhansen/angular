@@ -18,8 +18,7 @@ jobs:
           fetch-depth: 0
       - name: Extract project version
         id: extract_version
-        run: |
-          cd book-network-ui
+        run:
           echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
 
       - name: Login to DockerHub
