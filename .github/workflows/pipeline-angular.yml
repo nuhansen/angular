@@ -7,6 +7,7 @@ on:
     paths:
       - src/**
       - .github/workflows/pipeline-angular.yml
+      - 'nginx.conf'
 jobs:
   build-image:
     name: Build FE Docker image
