@@ -9,6 +9,7 @@ on:
       - .github/workflows/pipeline-angular.yml
       - 'nginx.conf'
       - 'Dockerfile'
+      - 'package.json'
 jobs:
   build-image:
     name: Build FE Docker image
@@ -16,7 +17,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with: 
+        with:
           fetch-depth: 0
       - name: Extract project version
         id: extract_version
