@@ -12,9 +12,12 @@ import {
 import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http'
+import { customInterceptor } from './services/interceptor/custom.interceptor'
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(withInterceptors([customInterceptor])),
     provideRouter(routes,
       withRouterConfig({
         onSameUrlNavigation: 'reload'
@@ -29,6 +32,7 @@ export const appConfig: ApplicationConfig = {
     ),
     importProvidersFrom(SidebarModule, DropdownModule),
     IconSetService,
-    provideAnimations()
+    provideAnimations(),
+    provideHttpClient()
   ]
 };

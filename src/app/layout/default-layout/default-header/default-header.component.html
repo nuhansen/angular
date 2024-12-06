@@ -72,8 +72,8 @@
 
         <li>
           <a cDropdownItem routerLink="">
-            <svg cIcon class="me-2" name="cilAccountLogout"></svg>
-            Logout
+            <svg cIcon class="me-2" name="cilAccountLogout" (click)="logout()"></svg>
+            <span (click)="logout()">Logout</span>
           </a>
         </li>
       </ul>

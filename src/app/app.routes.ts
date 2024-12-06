@@ -1,12 +1,14 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
-
+import { authGuard } from './services/guard/auth.guard'
+import { NgModule } from '@angular/core';
+import {ActivateAccountComponent} from './views/pages/activate-account/activate-account.component';
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
+  // {
+  //   path: 'dashboard',
+  //   redirectTo: 'dashboard',
+  //   pathMatch: 'full',
+  // },
   {
     path: '',
     component: DefaultLayoutComponent,
@@ -16,11 +18,18 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
+        loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
+        canActivate: [authGuard]
       },
       {
         path: 'forms',
-        loadChildren: () => import('./views/forms/routes').then((m) => m.routes)
+        loadChildren: () => import('./views/forms/routes').then((m) => m.routes),
+        canActivate: [authGuard]
+      },
+      {
+        path: 'books',
+        loadChildren: () => import('./views/books/book-routing.module').then((m) => m.routes),
+        canActivate: [authGuard]
       },
     ]
   },
@@ -52,5 +61,15 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
-  { path: '**', redirectTo: 'dashboard' }
+  {
+    path: 'activate-account',
+    component: ActivateAccountComponent
+  },
+  { path: '**', redirectTo: 'login' }
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
