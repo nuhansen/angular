@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 })
 export class ApiConfiguration {
   // rootUrl: string = 'http://localhost:8088/api/v1';
-  rootUrl: string = 'hhttps://projecth.site/bsn-be/api/v1';
+  rootUrl: string = 'https://projecth.site/bsn-be/api/v1';
 }
 
 /**
