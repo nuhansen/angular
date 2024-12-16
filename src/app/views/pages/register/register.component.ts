@@ -6,13 +6,14 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/services/authentication.service';
 import { NgFor, NgIf } from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import { NgxSpinnerComponent, NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
     standalone: true,
-    imports: [FormsModule, NgIf, NgFor,ContainerComponent, RowComponent, ColComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective]
+    imports: [NgxSpinnerModule,NgxSpinnerComponent,FormsModule, NgIf, NgFor,ContainerComponent, RowComponent, ColComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective]
 })
 export class RegisterComponent {
 

@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
   withEnabledBlockingInitialNavigation,
@@ -14,10 +14,12 @@ import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http'
 import { customInterceptor } from './services/interceptor/custom.interceptor'
+import { loadingInterceptor } from './services/interceptor/loading.interceptor'
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withInterceptors([customInterceptor])),
+    // provideHttpClient(withInterceptors([customInterceptor])),
+    provideHttpClient(withInterceptors([customInterceptor, loadingInterceptor])),
     provideRouter(routes,
       withRouterConfig({
         onSameUrlNavigation: 'reload'
@@ -30,7 +32,7 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions(),
       withHashLocation()
     ),
-    importProvidersFrom(SidebarModule, DropdownModule),
+    importProvidersFrom(SidebarModule, DropdownModule, BrowserAnimationsModule),
     IconSetService,
     provideAnimations(),
     provideHttpClient()

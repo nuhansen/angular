@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {PageResponseBookResponse} from '../../../services/models/page-response-book-response';
 import {BookService} from '../../../services/services/book.service';
 import {BookResponse} from '../../../services/models/book-response';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { BookCardComponent } from '../../components/book-card/book-card.component';
-import { ButtonCloseDirective, ButtonDirective, ModalBodyComponent, ModalComponent, ModalFooterComponent, ModalHeaderComponent, ModalModule, ModalTitleDirective, ModalToggleDirective } from '@coreui/angular';
+import { ButtonCloseDirective, ButtonDirective, ModalBodyComponent, ModalComponent, ModalFooterComponent, ModalHeaderComponent, ModalModule, ModalTitleDirective, ModalToggleDirective, PageItemDirective, PageLinkDirective, PaginationComponent } from '@coreui/angular';
 import { ManageBookComponent } from "../manage-book/manage-book.component";
 
 @Component({
@@ -20,7 +20,13 @@ import { ManageBookComponent } from "../manage-book/manage-book.component";
     ModalHeaderComponent,
     ModalTitleDirective,
     ModalToggleDirective,
-    ButtonDirective, ManageBookComponent],
+    ButtonDirective,
+    ManageBookComponent,
+    PaginationComponent,
+    PageItemDirective,
+    PageLinkDirective,
+    RouterLink
+  ],
 })
 export class MyBooksComponent implements OnInit {
 
@@ -28,6 +34,8 @@ export class MyBooksComponent implements OnInit {
   page = 0;
   size = 5;
   pages: any = [];
+
+  public visible=false;
 
   constructor(
     private bookService: BookService,
@@ -37,6 +45,14 @@ export class MyBooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllBooks();
+  }
+
+  toggleLiveDemo() {
+    this.visible = !this.visible;
+  }
+
+  handleLiveDemoChange(event: any) {
+    this.visible = event;
   }
 
   private findAllBooks() {

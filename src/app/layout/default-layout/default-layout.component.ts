@@ -12,11 +12,13 @@ import {
   SidebarHeaderComponent,
   SidebarNavComponent,
   SidebarToggleDirective,
-  SidebarTogglerDirective
+  SidebarTogglerDirective,
+
 } from '@coreui/angular';
 
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
 import { navItems } from './_nav';
+import { NgxSpinnerComponent, NgxSpinnerModule } from 'ngx-spinner';
 
 function isOverflown(element: HTMLElement) {
   return (
@@ -44,7 +46,9 @@ function isOverflown(element: HTMLElement) {
     ShadowOnScrollDirective,
     ContainerComponent,
     RouterOutlet,
-    DefaultFooterComponent
+    DefaultFooterComponent,
+    NgxSpinnerModule,
+    NgxSpinnerComponent
   ]
 })
 export class DefaultLayoutComponent {

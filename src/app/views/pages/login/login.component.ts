@@ -7,13 +7,15 @@ import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, Tex
 import { Router } from '@angular/router';
 import {TokenService} from '../../../services/token/token.service';
 import {FormsModule} from '@angular/forms';
+import { NgxSpinnerComponent, NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     standalone: true,
-    imports: [FormsModule, NgIf, NgFor, ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle]
+    imports: [NgxSpinnerModule,
+      NgxSpinnerComponent, FormsModule, NgIf, NgFor, ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle]
 })
 export class LoginComponent {
 

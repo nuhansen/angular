@@ -57,12 +57,12 @@ export const navItems: INavData[] = [
       }
     ]
   },{
-    name: 'Share Image',
+    name: 'Share Books',
     url: '/books',
     iconComponent: { name: 'cil-notes' },
     children: [
       {
-        name: 'My Image',
+        name: 'My Books',
         url: '/books/my-books',
         icon: 'nav-icon-bullet'
       }

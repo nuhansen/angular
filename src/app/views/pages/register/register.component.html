@@ -1,13 +1,16 @@
 <div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center">
   <c-container>
     <c-row class="justify-content-center">
-      <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length">
-        <p *ngFor="let msg of errorMsg">{{msg}}</p>
-      </div>
       <c-col lg="7" md="9" xl="6">
         <c-card class="mx-4">
           <c-card-body class="p-4">
+            <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length">
+              <p *ngFor="let msg of errorMsg">{{msg}}</p>
+            </div>
             <form cForm>
+              <ngx-spinner>
+                <p class="text-white">loading...</p>
+              </ngx-spinner>
               <h1>Register</h1>
               <p class="text-body-secondary">Create your account</p>
               <c-input-group class="mb-3">

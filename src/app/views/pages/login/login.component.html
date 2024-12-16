@@ -5,6 +5,9 @@
         <c-card-group>
           <c-card class="p-4">
             <c-card-body>
+              <ngx-spinner>
+                <p class="text-white">loading...</p>
+              </ngx-spinner>
               <form cForm (submit)="login()">
                 <h1>Login</h1>
                 <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length">
