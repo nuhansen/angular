@@ -42,7 +42,9 @@ export class BookCardComponent {
   set manage(value: boolean) {
     this._manage = value;
   }
+  @Input() bookId: number | null = null; //
 
+  @Output() onSuccess: EventEmitter<void> = new EventEmitter<void>();
   @Output() private share: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();
   @Output() private archive: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();
   @Output() private addToWaitingList: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();

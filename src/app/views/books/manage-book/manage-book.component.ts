@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BookRequest} from '../../../services/models/book-request';
 import {BookService} from '../../../services/services/book.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -13,7 +13,9 @@ import { FormsModule } from '@angular/forms';
   imports: [NgIf, NgFor, FormsModule]
 })
 export class ManageBookComponent implements OnInit {
-
+  @Input() bookId: number | null = null; // Receive book ID for editing
+  @Output() onCloseModal: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onSuccess: EventEmitter<void> = new EventEmitter<void>();
   errorMsg: Array<string> = [];
   bookRequest: BookRequest = {
     authorName: '',
@@ -63,6 +65,7 @@ export class ManageBookComponent implements OnInit {
           }
         }).subscribe({
           next: () => {
+            this.onSuccess.emit();
             this.router.navigate(['/books/my-books']);
           }
         });
@@ -86,5 +89,9 @@ export class ManageBookComponent implements OnInit {
       };
       reader.readAsDataURL(this.selectedBookCover);
     }
+  }
+
+  onCloseModalBtn(){
+    this.onCloseModal.emit();
   }
 }

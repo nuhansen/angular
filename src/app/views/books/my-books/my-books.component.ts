@@ -3,10 +3,10 @@ import {PageResponseBookResponse} from '../../../services/models/page-response-b
 import {BookService} from '../../../services/services/book.service';
 import {BookResponse} from '../../../services/models/book-response';
 import {Router, RouterLink} from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { BookCardComponent } from '../../components/book-card/book-card.component';
-import { ButtonCloseDirective, ButtonDirective, ModalBodyComponent, ModalComponent, ModalFooterComponent, ModalHeaderComponent, ModalModule, ModalTitleDirective, ModalToggleDirective, PageItemDirective, PageLinkDirective, PaginationComponent } from '@coreui/angular';
+import { ButtonCloseDirective, ButtonDirective, CardBodyComponent, CardComponent, CardHeaderComponent, ColComponent, ModalBodyComponent, ModalComponent, ModalFooterComponent, ModalHeaderComponent, ModalModule, ModalTitleDirective, ModalToggleDirective, PageItemDirective, PageLinkDirective, PaginationComponent, RowComponent } from '@coreui/angular';
 import { ManageBookComponent } from "../manage-book/manage-book.component";
 
 @Component({
@@ -16,7 +16,7 @@ import { ManageBookComponent } from "../manage-book/manage-book.component";
   standalone:true,
   imports: [FormsModule, NgFor, BookCardComponent, ModalModule, ButtonCloseDirective, ModalBodyComponent,
     ModalComponent,
-    ModalFooterComponent,
+    // ModalFooterComponent,
     ModalHeaderComponent,
     ModalTitleDirective,
     ModalToggleDirective,
@@ -25,17 +25,39 @@ import { ManageBookComponent } from "../manage-book/manage-book.component";
     PaginationComponent,
     PageItemDirective,
     PageLinkDirective,
-    RouterLink
+    RowComponent,
+    ReactiveFormsModule,
+    RowComponent,
+    ColComponent,
+    CardComponent,
+    CardHeaderComponent,
+    CardBodyComponent
   ],
 })
 export class MyBooksComponent implements OnInit {
+
+  visible: boolean = false;
+  selectedBookId: number | null = null;
+
+  // Method to open the modal
+  openModal() {
+    this.visible = true;
+  }
+
+  // Method to close the modal
+  closeModal() {
+    this.visible = false;
+  }
+
+  handleSaveSuccess() {
+    this.closeModal(); // Close modal
+    this.findAllBooks(); // Refresh book list
+  }
 
   bookResponse: PageResponseBookResponse = {};
   page = 0;
   size = 5;
   pages: any = [];
-
-  public visible=false;
 
   constructor(
     private bookService: BookService,
@@ -120,6 +142,8 @@ export class MyBooksComponent implements OnInit {
   }
 
   editBook(book: BookResponse) {
-    this.router.navigate(['books', 'manage', book.id]);
+    // this.router.navigate(['books', 'manage', book.id]);
+    this.selectedBookId = book.id ?? null;
+    this.visible = true;
   }
 }

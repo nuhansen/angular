@@ -1,102 +1,101 @@
-<h3>My books list</h3>
-<div class="d-flex justify-content-end mb-3">
-  <!-- <a routerLink="/books/manage" class="btn btn-outline-primary">
-    <i class="fas fa-plus"></i>&nbsp;New books
-  </a> -->
-  <button [cModalToggle]="staticBackdropModal.id" cButton>New Books</button>
-</div>
-<hr>
+<c-row ngPreserveWhitespaces>
 
-<div class="d-flex justify-content-start gap-4 flex-wrap">
-  <app-book-card
-    *ngFor="let book of bookResponse.content"
-    [book]="book"
-    [manage]="true"
-    (archive)="archiveBook($event)"
-    (share)="shareBook($event)"
-    (edit)="editBook($event)"
-  ></app-book-card>
-</div>
-<div class="d-flex justify-content-start mt-3">
-<c-pagination aria-label="Page navigation example">
-  <li cPageItem>
-    <!-- <a cPageLink [routerLink]>Previous</a> -->
-    <a
-          (click)="goToFirstPage()"
-          class="page-link"
-          href="javascript:void(0)"
-          aria-label="Previous"
-          [class.disabled]="page === 0"
-        >
-        &laquo;
-        </a>
-  </li>
-  <li cPageItem>
-    <!-- <a cPageLink [routerLink]>Previous</a> -->
-    <a
-    cPageLink
-          (click)="goToPreviousPage()"
-          class="page-link"
-          href="javascript:void(0)"
-          aria-label="Previous"
-          [class.disabled]="page === 0"
-        >
-        &LeftTriangle;
-    </a>
-  </li>
-  <li
-        class="page-item"
-        *ngFor="let pageIndex of pages"
-      >
-        <a
-          (click)="gotToPage(pageIndex)"
-          class="page-link"
-          [class.active]="page === pageIndex"
-          href="javascript:void(0)"
-        >{{ pageIndex + 1 }}</a>
-      </li>
-  <li cPageItem>
-    <a
-          (click)="goToNextPage()"
-          class="page-link"
-          href="javascript:void(0)"
-          aria-label="Next"
-          [class.disabled]="isLastPage"
-        >
-        &RightTriangle;
-    </a>
-  </li>
-  <li cPageItem>
-    <a
-          (click)="goToLastPage()"
-          class="page-link"
-          href="javascript:void(0)"
-          aria-label="Next"
-          [class.disabled]="isLastPage"
-        >
-        &raquo;
-    </a>
-  </li>
-</c-pagination>
-</div>
-
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>My books list</strong>
+      </c-card-header>
+      <c-card-body>
+        <div class="d-flex justify-content-end mb-3">
+          <button [cModalToggle]="staticBackdropModal.id" cButton>New Books</button>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-start gap-4 flex-wrap">
+          <app-book-card
+            *ngFor="let book of bookResponse.content"
+            [book]="book"
+            [manage]="true"
+            (archive)="archiveBook($event)"
+            (share)="shareBook($event)"
+            (edit)="editBook($event)"
+          ></app-book-card>
+        </div>
+        <div class="d-flex justify-content-start mt-3">
+        <c-pagination aria-label="Page navigation example">
+          <li cPageItem>
+            <a
+                  (click)="goToFirstPage()"
+                  class="page-link"
+                  href="javascript:void(0)"
+                  aria-label="Previous"
+                  [class.disabled]="page === 0"
+                >
+                &laquo;
+                </a>
+          </li>
+          <li cPageItem>
+            <a
+            cPageLink
+                  (click)="goToPreviousPage()"
+                  class="page-link"
+                  href="javascript:void(0)"
+                  aria-label="Previous"
+                  [class.disabled]="page === 0"
+                >
+                &LeftTriangle;
+            </a>
+          </li>
+          <li
+                class="page-item"
+                *ngFor="let pageIndex of pages"
+              >
+                <a
+                  (click)="gotToPage(pageIndex)"
+                  class="page-link"
+                  [class.active]="page === pageIndex"
+                  href="javascript:void(0)"
+                >{{ pageIndex + 1 }}</a>
+              </li>
+          <li cPageItem>
+            <a
+                  (click)="goToNextPage()"
+                  class="page-link"
+                  href="javascript:void(0)"
+                  aria-label="Next"
+                  [class.disabled]="isLastPage"
+                >
+                &RightTriangle;
+            </a>
+          </li>
+          <li cPageItem>
+            <a
+                  (click)="goToLastPage()"
+                  class="page-link"
+                  href="javascript:void(0)"
+                  aria-label="Next"
+                  [class.disabled]="isLastPage"
+                >
+                &raquo;
+            </a>
+          </li>
+        </c-pagination>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
 <c-modal #staticBackdropModal
     backdrop="static"
     id="staticBackdropModal"
     size="xl"  [visible]="visible"
-    (visibleChange)="handleLiveDemoChange($event)"
+    [(visible)]="visible"
 >
   <c-modal-header>
     <h5 cModalTitle>Modal title</h5>
     <button [cModalToggle]="staticBackdropModal.id" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <app-manage-book></app-manage-book>
+    <app-manage-book [bookId]="selectedBookId" (onSuccess)="handleSaveSuccess()" (onCloseModal)="closeModal()"></app-manage-book>
   </c-modal-body>
-  <c-modal-footer>
-    <button (click)="toggleLiveDemo()" cButton color="secondary">
-      Close
-    </button>
-    <button cButton color="primary">Understood</button>
-  </c-modal-footer>
 </c-modal>
+

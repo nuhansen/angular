@@ -5,7 +5,7 @@ import {BookResponse} from '../../../services/models/book-response';
 import {Router} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgFor, NgIf, NgStyle } from '@angular/common';
-import { ButtonDirective, CardBodyComponent, CardComponent, CardGroupComponent, ColComponent, ContainerComponent, FormControlDirective, FormDirective, InputGroupComponent, InputGroupTextDirective, RowComponent, TextColorDirective } from '@coreui/angular';
+import { ButtonDirective, CardBodyComponent, CardComponent, CardGroupComponent, CardHeaderComponent, ColComponent, ContainerComponent, FormControlDirective, FormDirective, InputGroupComponent, InputGroupTextDirective, PaginationComponent, RowComponent, TextColorDirective } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { BookCardComponent } from '../../components/book-card/book-card.component';
 
@@ -14,7 +14,7 @@ import { BookCardComponent } from '../../components/book-card/book-card.componen
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss'],
   standalone:true,
-  imports: [BookCardComponent, FormsModule, NgIf, NgFor],
+  imports: [BookCardComponent, FormsModule, NgIf, NgFor, PaginationComponent, RowComponent,CardBodyComponent, CardComponent, CardHeaderComponent, ColComponent],
 })
 export class BookListComponent implements OnInit {
   bookResponse: PageResponseBookResponse = {};
