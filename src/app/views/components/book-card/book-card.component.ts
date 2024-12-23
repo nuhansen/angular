@@ -11,7 +11,7 @@ import { freeSet } from '@coreui/icons';
   templateUrl: './book-card.component.html',
   styleUrls: ['./book-card.component.scss'],
   standalone:true,
-  imports:[CardGroupComponent, TooltipDirective, RatingComponent, NgIf, CardFooterComponent,IconDirective, ButtonGroupComponent, ButtonDirective,RowComponent, NgFor, ColComponent, TextColorDirective, CardComponent, BorderDirective, CardHeaderComponent, CardBodyComponent, CardTitleDirective, CardTextDirective, CardSubtitleDirective]
+  imports:[TooltipDirective, RatingComponent, NgIf,IconDirective, ButtonGroupComponent, ButtonDirective, TextColorDirective, CardComponent, BorderDirective,  CardBodyComponent, CardTitleDirective, CardTextDirective, CardSubtitleDirective]
 })
 export class BookCardComponent {
   icons = freeSet ;
