@@ -1,22 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BookService} from '../../../services/services/book.service';
 import {PageResponseBookResponse} from '../../../services/models/page-response-book-response';
 import {BookResponse} from '../../../services/models/book-response';
 import {Router} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgFor, NgIf, NgStyle } from '@angular/common';
-import { ButtonDirective, CardBodyComponent, CardComponent, CardGroupComponent, CardHeaderComponent, ColComponent, ContainerComponent, FormControlDirective, FormDirective, InputGroupComponent, InputGroupTextDirective, PaginationComponent, RowComponent, TextColorDirective } from '@coreui/angular';
+import { ButtonDirective, CardBodyComponent, CardComponent, CardGroupComponent, CardHeaderComponent, ColComponent, ContainerComponent, FormControlDirective, FormDirective, InputGroupComponent, InputGroupTextDirective, ModalBodyComponent, ModalComponent, ModalFooterComponent, ModalHeaderComponent, ModalModule, ModalTitleDirective, ModalToggleDirective, PaginationComponent, RowComponent, TextColorDirective } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { BookCardComponent } from '../../components/book-card/book-card.component';
+import { BookDetailsComponent } from "../book-details/book-details.component";
 
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss'],
   standalone:true,
-  imports: [BookCardComponent, FormsModule, NgIf, NgFor, PaginationComponent, RowComponent,CardBodyComponent, CardComponent, CardHeaderComponent, ColComponent],
+  imports: [BookCardComponent, FormsModule, NgIf, NgFor, PaginationComponent, RowComponent, CardBodyComponent, CardComponent, CardHeaderComponent, ColComponent, ModalBodyComponent, ModalComponent, ModalFooterComponent, ModalHeaderComponent, ModalModule, ModalTitleDirective, ModalToggleDirective, BookDetailsComponent],
 })
 export class BookListComponent implements OnInit {
+  visible: boolean = false;
+  selectedBook: BookResponse | null = null;
+
+  colors = [
+    { color: 'primary', textColor: 'primary' }
+  ];
   bookResponse: PageResponseBookResponse = {};
   page = 0;
   size = 5;
@@ -96,7 +103,16 @@ export class BookListComponent implements OnInit {
     });
   }
 
-  displayBookDetails(book: BookResponse) {
-    this.router.navigate(['books', 'details', book.id]);
+  // displayBookDetails(book: BookResponse) {
+  //   this.router.navigate(['books', 'details', book.id]);
+  // }
+  displayBookDetails(book: BookResponse): void {
+    this.selectedBook = book; // Set the selected book
+    this.visible = true; // Show the modal
+  }
+
+  closeModal(): void {
+    this.visible = false; // Hide the modal
+    this.selectedBook = null; // Clear the selected book
   }
 }

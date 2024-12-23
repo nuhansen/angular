@@ -1,41 +1,40 @@
-<div
-  class="card"
-  style="width: 20rem;"
-  [class.border-success]="book.shareable"
-  [class.border-warning]="book.archived"
->
-  <img height="200" [src]="bookCover" class="card-img-top" alt="...">
-  <div class="card-body overflow-scroll">
-    <h5 class="card-title fs-6 text-nowrap fw-bold mb-1"><i class="fa-solid fa-book"></i>&nbsp;{{book.title}}</h5>
-    <h5 class="card-subtitle fs-6 text-secondary mb-1"><i class="fa-solid fa-user-check"></i>&nbsp;{{ book.authorName }}</h5>
-    <h6 class="card-subtitle fs-6 text-secondary mb-1"><i class="fas fa-code"></i>&nbsp;{{ book.isbn }}</h6>
-    <h6 class="card-subtitle fs-6 text-secondary"><i class="fas fa-user"></i>&nbsp;{{ book.owner }}</h6>
+<!-- <div style="width: 20rem;"> -->
+<c-card [cBorder]="{top: {color: colors[7].color}}" [textColor]="colors[7].textColor" class="mb-3">
+  <img cCardImg="top" height="200" width="100" [src]="bookCover" class="card-img-top" alt="...">
+  <c-card-body class="overflow-scroll">
+    <h5 cCardTitle ><svg [cIcon]="icons.cilBook" size="lg" title="List Icon"></svg>&nbsp;{{book.title}}</h5>
+    <h6 cCardSubtitle class="mb-2 text-medium-emphasis">
+      <svg [cIcon]="icons.cilAddressBook" size="lg" title="List Icon"></svg>&nbsp;{{ book.authorName }}
+    </h6>
+    <h6 cCardSubtitle class="mb-2 text-medium-emphasis">
+      <svg [cIcon]="icons.cilBarcode" size="lg" title="List Icon"></svg>&nbsp;{{ book.isbn }}
+    </h6>
+    <h6 cCardSubtitle class="mb-2 text-medium-emphasis">
+      <svg [cIcon]="icons.cilUser" size="lg" title="List Icon"></svg>&nbsp;{{ book.owner }}
+    </h6>
     <hr>
-    <p class="card-text">{{book.synopsis}}</p>
-  </div>
+    <p cCardText>&nbsp;{{book.synopsis}}</p>
   <div class="card-footer d-flex gap-2 justify-content-between align-items-center">
     <!-- test:{{manage}} -->
     <div class="d-flex gap-2">
       <app-rating [rating]="book.rate || 0"></app-rating>
       <span class="fw-bold" *ngIf="book.rate || 0 > 0">
-        {{book.rate}}
+        Rating: {{book.rate}}
       </span>
     </div>
     <div class="d-flex gap-2" *ngIf="!manage">
-      <i (click)="onShowDetails()" class="fas fa-circle-info text-primary"></i>
-      <i (click)="onBorrow()" class="fas fa-list-check text-primary"></i>
-      <i (click)="onAddToWaitingList()" class="fas fa-heart text-danger"></i>
+      <i (click)="onShowDetails()" cTooltip="Detail Books"><svg [cIcon]="icons.cilInfo" size="lg" title="List Icon"></svg></i>
+      <i (click)="onBorrow()" cTooltip="Borrow Books"><svg [cIcon]="icons.cilCart" size="lg" title="List Icon"></svg></i>
+      <i (click)="onAddToWaitingList()" cTooltip="Waiting List"><svg [cIcon]="icons.cilListHighPriority" size="lg" title="List Icon"></svg></i>
     </div>
     <div class="d-flex gap-2" *ngIf="manage">
       <c-button-group aria-label="Basic example" role="group">
-        <button (click)="onEdit()" cButton color="secondary" variant="outline" [active]="true"><span><svg cIcon name="cilPencil"></svg></span></button>
-        <button (click)="onShare()" cButton color="secondary" variant="outline"> <span><svg cIcon name="cilShareAll"></svg></span></button>
-        <button (click)="onArchive()" cButton color="secondary" variant="outline"><span><svg cIcon name="cilTrash"></svg></span></button>
+        <button (click)="onEdit()" cButton color="primary" variant="outline" [active]="true"><span><svg cIcon name="cilPencil"></svg></span></button>
+        <button (click)="onShare()" cButton color="primary" variant="outline"> <span><svg cIcon name="cilShareAll"></svg></span></button>
+        <button (click)="onArchive()" cButton color="primary" variant="outline"><span><svg cIcon name="cilTrash"></svg></span></button>
       </c-button-group>
-
-      <!-- <i (click)="onEdit()" class="fas fa-edit text-success"></i>
-      <i (click)="onShare()" class="fas fa-share-nodes text-primary"></i>
-      <i (click)="onArchive()" class="fas fa-archive text-danger"></i> -->
     </div>
   </div>
-</div>
+</c-card-body>
+</c-card>
+<!-- </div> -->

@@ -1,12 +1,14 @@
 <div class="p-2">
   <h2>Manage my book</h2>
   <hr>
+  selected picture : {{selectedPicture}}
   <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMsg.length">
     <p class="p-0 m-0" *ngFor="let msg of errorMsg">{{msg}}</p>
   </div>
   <div class="d-flex gap-2">
     <div class="col-3">
-      <img class="rounded-1" width="100%" height="90%" [src]=" selectedPicture || 'https://source.unsplash.com/user/c_v_r/1900x800'" alt="">
+      <!-- [src]=" 'data:image/jpg;base64,' + book.cover -->
+      <img class="rounded-1" width="100%" height="90%" [src]=" selectedPicture || 'assets/images/noimages.jpeg'" alt="">
       <div class="mt-2">
         <input
           (change)="onFileSelected($event)"

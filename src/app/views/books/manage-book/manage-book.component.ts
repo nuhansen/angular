@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {BookRequest} from '../../../services/models/book-request';
 import {BookService} from '../../../services/services/book.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   standalone:true,
   imports: [NgIf, NgFor, FormsModule]
 })
-export class ManageBookComponent implements OnInit {
+export class ManageBookComponent implements OnInit , OnChanges{
   @Input() bookId: number | null = null; // Receive book ID for editing
   @Output() onCloseModal: EventEmitter<void> = new EventEmitter<void>();
   @Output() onSuccess: EventEmitter<void> = new EventEmitter<void>();
@@ -48,9 +48,30 @@ export class ManageBookComponent implements OnInit {
            synopsis: book.synopsis as string,
            shareable: book.shareable
          }
+         this.selectedPicture='data:image/jpg;base64,' + book.cover
         }
       });
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+      if (this.bookId) {
+        this.bookService.findBookById({
+          'book-id': this.bookId
+        }).subscribe({
+          next: (book) => {
+           this.bookRequest = {
+             id: book.id,
+             title: book.title as string,
+             authorName: book.authorName as string,
+             isbn: book.isbn as string,
+             synopsis: book.synopsis as string,
+             shareable: book.shareable
+           }
+           this.selectedPicture='data:image/jpg;base64,' + book.cover
+          }
+        });
+      }
   }
 
   saveBook() {

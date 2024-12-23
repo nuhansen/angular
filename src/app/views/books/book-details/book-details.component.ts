@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BookResponse} from '../../../services/models/book-response';
 import {BookService} from '../../../services/services/book.service';
 import {ActivatedRoute} from '@angular/router';
@@ -6,16 +6,19 @@ import {FeedbackService} from '../../../services/services/feedback.service';
 import {PageResponseFeedbackResponse} from '../../../services/models/page-response-feedback-response';
 import { FormsModule } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
+import { PaginationComponent } from '@coreui/angular';
 
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
   styleUrls: ['./book-details.component.scss'],
   standalone:true,
-  imports: [FormsModule, NgFor]
+  imports: [FormsModule, NgFor, PaginationComponent]
 })
 export class BookDetailsComponent implements OnInit {
-  book: BookResponse = {};
+  // @Input() book: number | null = null;
+  @Output() onCloseModal: EventEmitter<void> = new EventEmitter<void>();
+  @Input() book: BookResponse = {};
   feedbacks: PageResponseFeedbackResponse = {};
   page = 0;
   size = 5;
@@ -29,10 +32,12 @@ export class BookDetailsComponent implements OnInit {
   ) {
   }
   ngOnInit(): void {
+    console.log("ini bookId", this.book);
+
     this.bookId = this.activatedRoute.snapshot.params['bookId'];
-    if (this.bookId) {
+    if (this.book.id) {
       this.bookService.findBookById({
-        'book-id': this.bookId
+        'book-id': this.book.id
       }).subscribe({
         next: (book) => {
           this.book = book;
@@ -40,6 +45,10 @@ export class BookDetailsComponent implements OnInit {
         }
       });
     }
+  }
+
+  onCloseModalBtn(){
+    this.onCloseModal.emit();
   }
 
   private findAllFeedbacks() {

@@ -1,0 +1,74 @@
+<div class="container mt-5">
+  <h2>Create New Blog</h2>
+  <form [formGroup]="blogForm" (ngSubmit)="saveBlog()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input formControlName="name" type="text" class="form-control" id="name">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea formControlName="description" class="form-control" id="description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input formControlName="image" type="text" class="form-control" id="image">
+    </div>
+
+    <div class="form-group">
+      <label for="bio">Bio</label>
+      <textarea formControlName="bio" class="form-control" id="bio"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="contactMessage">Contact Message</label>
+      <textarea formControlName="contactMessage" class="form-control" id="contactMessage"></textarea>
+    </div>
+
+    <div formGroupName="address" class="form-row">
+      <div class="col">
+        <label for="street">Street</label>
+        <input formControlName="street" type="text" class="form-control" id="street">
+      </div>
+      <div class="col">
+        <label for="city">City</label>
+        <input formControlName="city" type="text" class="form-control" id="city">
+      </div>
+      <div class="col">
+        <label for="state">State</label>
+        <input formControlName="state" type="text" class="form-control" id="state">
+      </div>
+      <div class="col">
+        <label for="zip">ZIP</label>
+        <input formControlName="zip" type="text" class="form-control" id="zip">
+      </div>
+    </div>
+
+    <div>
+      <h4>Social Links -{{social.controls}}</h4>
+      <button type="button" class="btn btn-success" (click)="addSocial()">Add Social</button>
+      <div *ngFor="let social of social.controls; let i = index" [formGroupName]="i">
+        <div class="form-row align-items-center">
+          <div class="col">
+            <label for="name">Name</label>
+            <input formControlName="name" type="text" class="form-control">
+          </div>
+          <div class="col">
+            <label for="url">URL</label>
+            <input formControlName="url" type="text" class="form-control">
+          </div>
+          <div class="col">
+            <label for="className">Class Name</label>
+            <input formControlName="className" type="text" class="form-control">
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-danger" (click)="removeSocial(i)">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Save Blog</button>
+  </form>
+</div>

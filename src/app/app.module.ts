@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app.routes';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivateAccountComponent} from './views/pages/activate-account/activate-account.component';
 import {CodeInputModule} from 'angular-code-input';
 import {ApiModule} from './services/api.module';
@@ -13,8 +13,9 @@ import {ApiModule} from './services/api.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    // FormsModule,
     CodeInputModule,
+    ReactiveFormsModule,
     // HttpClientModule,
     ApiModule.forRoot({rootUrl: 'https://projecth.site/bsn-be/api/v1'})
     // ApiModule.forRoot({rootUrl: 'http://localhost:8088/api/v1'})

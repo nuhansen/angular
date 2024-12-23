@@ -1,18 +1,33 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BookResponse} from '../../../services/models/book-response';
 import { RatingComponent } from '../rating/rating.component';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { IconDirective } from '@coreui/icons-angular';
-import { ButtonDirective, ButtonGroupComponent } from '@coreui/angular';
+import { BorderDirective, ButtonDirective, ButtonGroupComponent, CardBodyComponent, CardComponent, CardFooterComponent, CardGroupComponent, CardHeaderComponent, CardSubtitleDirective, CardTextDirective, CardTitleDirective, ColComponent, RowComponent, TextColorDirective, TooltipDirective } from '@coreui/angular';
+import { freeSet } from '@coreui/icons';
 
 @Component({
   selector: 'app-book-card',
   templateUrl: './book-card.component.html',
   styleUrls: ['./book-card.component.scss'],
   standalone:true,
-  imports:[RatingComponent, NgIf, IconDirective, ButtonGroupComponent, ButtonDirective]
+  imports:[CardGroupComponent, TooltipDirective, RatingComponent, NgIf, CardFooterComponent,IconDirective, ButtonGroupComponent, ButtonDirective,RowComponent, NgFor, ColComponent, TextColorDirective, CardComponent, BorderDirective, CardHeaderComponent, CardBodyComponent, CardTitleDirective, CardTextDirective, CardSubtitleDirective]
 })
 export class BookCardComponent {
+  icons = freeSet ;
+
+  colors = [
+    { color: 'primary', textColor: 'primary' },
+    { color: 'secondary', textColor: 'secondary' },
+    { color: 'success', textColor: 'success' },
+    { color: 'danger', textColor: 'danger' },
+    { color: 'warning', textColor: 'warning' },
+    { color: 'info', textColor: 'info' },
+    { color: 'light', textColor: 'light' },
+    { color: 'dark', textColor: 'dark' }
+  ];
+
+
   private _book: BookResponse = {};
   private _manage = false;
   private _bookCover: string | undefined;

@@ -72,5 +72,17 @@ export const navItems: INavData[] = [
         icon: 'nav-icon-bullet'
       }
     ]
-  }
+  },
+  // {
+  //   name: 'My Blog',
+  //   url: '/blogs',
+  //   iconComponent: { name: 'cil-notes' },
+  //   children: [
+  //     {
+  //       name: 'Create Blog',
+  //       url: '/blogs',
+  //       icon: 'nav-icon-bullet'
+  //     }
+  //   ]
+  // }
 ];

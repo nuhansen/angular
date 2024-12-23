@@ -1,6 +1,6 @@
 {
   "name": "angular-ui",
-  "version": "5.2.23",
+  "version": "5.2.24",
   "copyright": "Copyright 2024 creativeLabs Łukasz Holeczek",
   "license": "MIT",
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people) and contributors",
@@ -37,6 +37,7 @@
     "@coreui/icons": "^3.0.1",
     "@coreui/icons-angular": "~5.2.16",
     "@coreui/utils": "^2.0.2",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@ngx-translate/http-loader": "^8.0.0",
     "angular-code-input": "^2.0.0",
     "chart.js": "^4.4.4",

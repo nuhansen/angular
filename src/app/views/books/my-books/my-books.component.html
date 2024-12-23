@@ -95,7 +95,11 @@
     <button [cModalToggle]="staticBackdropModal.id" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <app-manage-book [bookId]="selectedBookId" (onSuccess)="handleSaveSuccess()" (onCloseModal)="closeModal()"></app-manage-book>
+    <app-manage-book
+    [bookId]="selectedBookId"
+    (onSuccess)="handleSaveSuccess()"
+    (onCloseModal)="closeModal()">
+    </app-manage-book>
   </c-modal-body>
 </c-modal>
 

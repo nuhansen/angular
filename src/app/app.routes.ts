@@ -31,6 +31,11 @@ export const routes: Routes = [
         loadChildren: () => import('./views/books/book-routing.module').then((m) => m.routes),
         canActivate: [authGuard]
       },
+      {
+        path: 'blogs',
+        loadChildren: () => import('./views/blogs/routes').then((m) => m.routes),
+        canActivate: [authGuard]
+      },
     ]
   },
   {
